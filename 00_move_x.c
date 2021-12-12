@@ -85,7 +85,12 @@ int main(int argc, char **argv)
 	canva = generate_new_canva(size_x, size_y);
 	put_pixel(1, 2, canva);
 	put_pixel(3, 4, canva);
-	move_pixel(3, 4, 5, 7, canva);
+	print_2d_array(canva);
+	sleep(1);
+	move_pixel(3, 4, 4, 5, canva);
+	print_2d_array(canva);
+	sleep(1);
+	move_pixel(4, 5, 5, 6, canva);
 	print_2d_array(canva);
 	return 0;
 }
