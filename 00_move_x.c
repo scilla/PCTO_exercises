@@ -13,7 +13,7 @@ canva_struct *generate_new_canva(int new_x_size, int new_y_size)
 {
 	canva_struct *canva = malloc(sizeof(canva_struct));
 	canva->x_size = new_x_size;
-	canva->x_size = new_y_size;
+	canva->y_size = new_y_size;
 	canva->arr = malloc(sizeof(char *) * new_y_size);
 	for (int i = 0; i < new_y_size; i++)
 	{
@@ -28,9 +28,16 @@ canva_struct *generate_new_canva(int new_x_size, int new_y_size)
 
 void print_2d_array(canva_struct *canva)
 {
-	printf("\e[1;1H\e[2J");
+	printf("\e[1;1H\e[2J"); // clear screen
+	printf(" ");
+	for (int n = 0; n < canva->x_size; n++)
+	{
+		printf("%2d", n);
+	}
+	printf("\n");
 	for (int i = 0; i < canva->y_size; i++)
 	{
+		printf("%2d", i);
 		for (int n = 0; n < canva->x_size; n++)
 		{
 			printf("%c ", canva->arr[i][n]);
@@ -58,6 +65,7 @@ void move_pixel(int from_x, int from_y, int to_x, int to_y, canva_struct *canva)
 {
 	char t;
 	t = get_pixel(from_x, from_y, canva);
+	delete_pixel(from_x, from_y, canva);
 	if (t == 'X')
 	{
 		put_pixel(to_x, to_y, canva);
@@ -75,6 +83,9 @@ int main(int argc, char **argv)
 	canva_struct *canva;
 
 	canva = generate_new_canva(size_x, size_y);
+	put_pixel(1, 2, canva);
+	put_pixel(3, 4, canva);
+	move_pixel(3, 4, 5, 7, canva);
 	print_2d_array(canva);
 	return 0;
 }
