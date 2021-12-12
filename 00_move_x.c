@@ -18,6 +18,10 @@ canva_struct *generate_new_canva(int new_x_size, int new_y_size)
 	for (int i = 0; i < new_y_size; i++)
 	{
 		canva->arr[i] = malloc(sizeof(char) * new_x_size);
+		for (int n = 0; n < new_x_size; n++)
+		{
+			canva->arr[i][n] = '-';
+		}
 	}
 	return canva;
 }
@@ -68,7 +72,7 @@ int main(int argc, char **argv)
 {
 	int size_x = 7;
 	int size_y = 8;
-	canva_struct* canva;
+	canva_struct *canva;
 
 	canva = generate_new_canva(size_x, size_y);
 	print_2d_array(canva);
