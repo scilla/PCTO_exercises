@@ -20,13 +20,16 @@ class Canvas:
 			for x in range(self.size_x):
 				new_array.append(0)
 			self.array.append(new_array)
-	
+
 	def get_pixel(self, x, y):
 		return self.array[y][x]
 
 	def write_pixel(self, x, y):
+		if y >= self.size_x or x >= self.size_y:
+			print(f"Scrittura fuori limiti! x={x} y={y}")
+			exit()
 		self.array[y][x] = 1
-	
+
 	def clear_pixel(self, x, y):
 		self.array[y][x] = 0
 
@@ -45,9 +48,13 @@ class Canvas:
 					print(" -", end="")
 			print("")
 
+size_y = 7
+size_x = 9
+canvas = Canvas(size_x, size_y)
 
-canvas = Canvas(17, 18)
-canvas.write_pixel(10, 11)
+# modifica da qui
 canvas.write_pixel(3, 4)
-canvas.write_pixel(5, 9)
+canvas.write_pixel(5, 1)
+# a qui
+
 canvas.print_canvas()
