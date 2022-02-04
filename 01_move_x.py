@@ -25,7 +25,7 @@ class Canvas:
 		return self.array[y][x]
 
 	def write_pixel(self, x, y):
-		if y >= self.size_x or x >= self.size_y:
+		if y >= self.size_y or x >= self.size_x:
 			print(f"Scrittura fuori limiti! x={x} y={y}")
 			exit()
 		self.array[y][x] = 1
@@ -55,6 +55,7 @@ canvas = Canvas(size_x, size_y)
 # modifica da qui
 canvas.write_pixel(3, 4)
 canvas.write_pixel(5, 1)
+canvas.write_pixel(5, 6)
 # a qui
 
 canvas.print_canvas()
