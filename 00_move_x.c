@@ -83,14 +83,12 @@ int main(int argc, char **argv)
 	canvas_struct *canvas;
 
 	canvas = generate_new_canvas(size_x, size_y);
+
+// modifica da qui
 	put_pixel(1, 2, canvas);
 	put_pixel(3, 4, canvas);
-	print_2d_array(canvas);
-	sleep(1);
-	move_pixel(3, 4, 4, 5, canvas);
-	print_2d_array(canvas);
-	sleep(1);
-	move_pixel(4, 5, 5, 6, canvas);
+// a qui
+
 	print_2d_array(canvas);
 	return 0;
 }
