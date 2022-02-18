@@ -6,6 +6,8 @@
 #define CROSS 'X'
 #define EMPTY '-'
 
+#define MAX_CANVAS 99
+
 #define POS(x, y) (y * canvas.x_size + x)
 
 typedef struct s_canvas
@@ -25,6 +27,10 @@ void error(char *e)
 
 void init_canvas(const int new_x_size, const int new_y_size)
 {
+	if (new_x_size > MAX_CANVAS || new_y_size > MAX_CANVAS)
+	{
+		error("Canvas size too big.");
+	}
 	canvas.x_size = new_x_size;
 	canvas.y_size = new_y_size;
 	canvas.arr = malloc(new_x_size * new_y_size);
