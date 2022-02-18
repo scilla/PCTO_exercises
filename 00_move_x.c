@@ -2,12 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct canvas
+typedef struct s_canvas
 {
-	int x_size;
-	int y_size;
-	char **arr;
-} canvas_struct;
+	char	*arr;
+	int		x_size;
+	int		y_size;
+} t_canvas;
 
 canvas_struct *generate_new_canvas(int new_x_size, int new_y_size)
 {
