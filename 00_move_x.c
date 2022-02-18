@@ -1,3 +1,8 @@
+// PCTO Challenge
+// Original author: @scilla
+// Original repo: https://github.com/scilla/PCTO_exercises
+// Contributors: @leeoocca
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
