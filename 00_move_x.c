@@ -78,8 +78,8 @@ void move_pixel(int from_x, int from_y, int to_x, int to_y, canvas_struct *canva
 
 int main()
 {
-	int size_x = 7;
-	int size_y = 8;
+	const int size_x = 7;
+	const int size_y = 8;
 	canvas_struct *canvas;
 
 	canvas = generate_new_canvas(size_x, size_y);
