@@ -57,18 +57,29 @@ void print_canvas()
 	}
 }
 
+void check_pixel(int x, int y)
+{
+	if (x < 0 || y < 0 || x >= canvas.x_size || y >= canvas.y_size)
+	{
+		error("Pixel out of canvas.");
+	}
+}
+
 char get_pixel(int from_x, int from_y)
 {
+	check_pixel(from_x, from_y);
 	return canvas.arr[POS(from_x, from_y)];
 }
 
 void delete_pixel(int from_x, int from_y)
 {
+	check_pixel(from_x, from_y);
 	canvas.arr[POS(from_x, from_y)] = EMPTY;
 }
 
 void put_pixel(int to_x, int to_y)
 {
+	check_pixel(to_x, to_y);
 	canvas.arr[POS(to_x, to_y)] = CROSS;
 }
 
