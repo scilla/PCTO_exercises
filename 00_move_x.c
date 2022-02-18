@@ -1,6 +1,12 @@
-#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+#define CROSS 'X'
+#define EMPTY '-'
+
+#define POS(x, y) (y * canvas.x_size + x)
 
 typedef struct s_canvas
 {
@@ -9,70 +15,62 @@ typedef struct s_canvas
 	int		y_size;
 } t_canvas;
 
-canvas_struct *generate_new_canvas(int new_x_size, int new_y_size)
+t_canvas canvas;
+
+void init_canvas(const int new_x_size, const int new_y_size)
 {
-	canvas_struct *canvas = malloc(sizeof(canvas_struct));
-	canvas->x_size = new_x_size;
-	canvas->y_size = new_y_size;
-	canvas->arr = malloc(sizeof(char *) * new_y_size);
-	for (int i = 0; i < new_y_size; i++)
-	{
-		canvas->arr[i] = malloc(sizeof(char) * new_x_size);
-		for (int n = 0; n < new_x_size; n++)
-		{
-			canvas->arr[i][n] = '-';
-		}
-	}
-	return canvas;
+	canvas.x_size = new_x_size;
+	canvas.y_size = new_y_size;
+	canvas.arr = malloc(new_x_size * new_y_size);
+	memset(canvas.arr, EMPTY, new_x_size * new_y_size);
 }
 
-void print_2d_array(canvas_struct *canvas)
+void print_canvas()
 {
 	printf("\e[1;1H\e[2J"); // clear screen
-	printf(" ");
-	for (int n = 0; n < canvas->x_size; n++)
+	printf("  ");
+	for (int n = 0; n < canvas.x_size; n++)
 	{
 		printf("%2d", n);
 	}
 	printf("\n");
-	for (int i = 0; i < canvas->y_size; i++)
+	for (int y = 0; y < canvas.y_size; y++)
 	{
-		printf("%2d", i);
-		for (int n = 0; n < canvas->x_size; n++)
+		printf("%2d ", y);
+		for (int x = 0; x < canvas.x_size; x++)
 		{
-			printf("%c ", canvas->arr[i][n]);
+			printf("%c ", canvas.arr[POS(x, y)]);
 		}
 		printf("\n");
 	}
 }
 
-char get_pixel(int from_x, int from_y, canvas_struct *canvas)
+char get_pixel(int from_x, int from_y)
 {
-	return canvas->arr[from_y][from_x];
+	return canvas.arr[POS(from_x, from_y)];
 }
 
-void delete_pixel(int from_x, int from_y, canvas_struct *canvas)
+void delete_pixel(int from_x, int from_y)
 {
-	canvas->arr[from_y][from_x] = '-';
+	canvas.arr[POS(from_x, from_y)] = EMPTY;
 }
 
-void put_pixel(int to_x, int to_y, canvas_struct *canvas)
+void put_pixel(int to_x, int to_y)
 {
-	canvas->arr[to_y][to_x] = 'X';
+	canvas.arr[POS(to_x, to_y)] = CROSS;
 }
 
-void move_pixel(int from_x, int from_y, int to_x, int to_y, canvas_struct *canvas)
+void move_pixel(int from_x, int from_y, int to_x, int to_y)
 {
-	char t;
-	t = get_pixel(from_x, from_y, canvas);
-	delete_pixel(from_x, from_y, canvas);
-	if (t == 'X')
+	char t = get_pixel(from_x, from_y);
+	delete_pixel(from_x, from_y);
+	if (t == CROSS)
 	{
-		put_pixel(to_x, to_y, canvas);
+		put_pixel(to_x, to_y);
 	}
 	else
 	{
-		delete_pixel(to_x, to_y, canvas);
+		delete_pixel(to_x, to_y);
 	}
 }
 
@@ -80,13 +78,14 @@ int main()
 {
 	const int size_x = 7;
 	const int size_y = 8;
-	canvas_struct *canvas;
 
-	canvas = generate_new_canvas(size_x, size_y);
+	init_canvas(size_x, size_y);
 
 	// modifica da qui
+	put_pixel(1, 2);
+	put_pixel(3, 4);
 	// a qui
 
-	print_2d_array(canvas);
+	print_canvas();
 	return 0;
 }
