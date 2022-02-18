@@ -17,6 +17,12 @@ typedef struct s_canvas
 
 t_canvas canvas;
 
+void error(char *e)
+{
+	printf("Error!\n%s\n", e);
+	exit(1);
+}
+
 void init_canvas(const int new_x_size, const int new_y_size)
 {
 	canvas.x_size = new_x_size;
